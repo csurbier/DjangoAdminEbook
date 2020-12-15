@@ -1,0 +1,11 @@
+{% load i18n %}
+ <div class="dropdown d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         {% blocktrans with filter_title=title %} By {{ filter_title }} {% endblocktrans %}
+    </button>
+    <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
+               {% for choice in choices %}
+                  <a class="dropdown-item" href="{{ choice.query_string|iriencode }}" title="{{ choice.display }}">{{ choice.display }}</a>
+               {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,49 @@
+{% load i18n %}
+
+{% if app_list %}
+  {% for app in app_list %}
+      <div class="card-header py-3">
+                  <a href="{{ app.app_url }}"><h6 class="m-0 font-weight-bold text-primary">{{ app.name }}</h6></a>
+      </div>
+      <div class="card-body">
+
+                   {% for model in app.models %}
+                       <table width="100%">
+
+                               <tr>
+                                   <td width="80%">
+                                    {% if model.admin_url %}
+                                       <a href="{{ model.admin_url }}"> <h3 class="font-weight-bold">{{ model.name }}</h3></a>
+                                    {% else %}
+                                      <h4 class="small font-weight-bold">{{ model.name }}</h4>
+                                    {% endif %}
+                                   </td>
+                                   <td width="10%">
+                                        {% if model.add_url %}
+                                        <a href="{{ model.add_url }}" class="btn btn-success btn-circle">
+                                            <i class="fas fa-plus-circle"></i>
+                                        </a>
+                                        {% else %}
+                                        {% endif %}
+                                    </td>
+                                   <td width="10%">
+                                       {% if model.add_url %}
+                                        <a href="{{ model.admin_url }}" class="btn btn-warning btn-circle">
+                                         {% if model.view_only %}
+                                            <i class="fas fa-eye"></i>
+                                         {% else %}
+                                               <i class="fas fa-edit"></i>
+                                         {% endif %}
+                                        </a>
+                                       {% else %}
+                                        {% endif %}
+                                    </td>
+                             </tr>
+
+                       </table>
+                  {% endfor %}
+                </div>
+  {% endfor %}
+{% else %}
+  <p>{% translate 'You don’t have permission to view or edit anything.' %}</p>
+{% endif %}
